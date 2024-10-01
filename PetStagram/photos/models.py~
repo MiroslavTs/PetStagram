@@ -2,12 +2,13 @@ from django.db import models
 from django.core.validators import MinLengthValidator
 
 from PetStagram.pets.models import Pet
+from PetStagram.photos.validators import FileSizeValidator
 
 
 class Photo(models.Model):
     photo = models.ImageField(
         validators=(
-            
+            FileSizeValidator(5),
         )
     )
 
