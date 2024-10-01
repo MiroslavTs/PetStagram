@@ -1,8 +1,10 @@
-def validate_size(value):
-    if value.size > 5 * 1024 * 1024:
-        raise ValueError("Max file size is 5 MB")
+# def validate_size(value):
+#     if value.size > 5 * 1024 * 1024:
+#         raise ValueError("Max file size is 5 MB")
+from django.utils.deconstruct import deconstructible
 
 
+@deconstructible
 class FileSizeValidator:
     def __init__(self, file_size_mb: int, message=None):
         self.file_size_mb = file_size_mb
