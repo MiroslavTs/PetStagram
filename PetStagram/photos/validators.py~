@@ -1,0 +1,24 @@
+def validate_size(value):
+    if value.size > 5 * 1024 * 1024:
+        raise ValueError("Max file size is 5 MB")
+
+
+class FileSizeValidator:
+    def __init__(self, file_size_mb: int, message=None):
+        self.file_size_mb = file_size_mb
+        self.message = f"Max file size is {file_size_mb} MB"
+
+    @property
+    def message(self):
+        return self.__message
+
+    @message.setter
+    def message(self, value):
+        if value is None:
+            self.__message = f"Max file size is {self.file_size_mb} MB"
+
+        self.__message = value
+
+    def __call__(self, value):
+        if value.size > self.file_size_mb * 1024 * 1024:
+            raise ValueError(self.message)
